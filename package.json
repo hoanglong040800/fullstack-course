@@ -5,8 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon --inspect src/index.js",
-    "watch": "sass --watch src/views/scss:src/public/css",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sass": "sass --watch src/views/scss:src/public/css"
   },
   "repository": {
     "type": "git",

@@ -29,11 +29,11 @@ console.log(__dirname);
 app.set('views', path.join(__dirname, 'views'));
 
 // Static
-  app.use(static(path.join(__dirname, 'public')));
+app.use(static(path.join(__dirname, 'public')));
 
 // Routing
 route(app);
 
-      app.listen(port, () => {
-        console.log(`\n[LINK] ------- http://localhost:${port}\n`);
-          });
+app.listen(port, () => {
+  console.log(`\n[LINK] ------- http://localhost:${port}\n`);
+});

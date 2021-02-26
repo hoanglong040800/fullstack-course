@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon src/index.js",
-    "sass": "sass --watch src/views/scss:src/public/css"
+    "sass": "sass --watch src/views/scss:src/public/css",
+    "format": "prettier --single-quote --trailing-comma all --write  *.{json,md}  src/*.js  src/*/*.{js,json,scss}"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
     "sass": "^1.32.8"
   }
 }

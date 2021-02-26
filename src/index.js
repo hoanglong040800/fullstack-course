@@ -10,6 +10,11 @@ const port = 3000
 app.use(morgan('combined'))
 
 
+// Middleware
+app.use(express.urlencoded())
+app.use(express.json())
+
+
 // Template engine
 app.engine('hbs', exphbs({
   defaultLayout: 'main',
@@ -21,13 +26,21 @@ app.set('views', path.join(__dirname, 'views'))
 
 // Static 
 app.use(express.static(path.join(__dirname, 'public')))
-  
 
-// Render
+
+// Routing
 app.get('/', (req, res) => {
   res.render('home')
 })
 
+app.get('/news', (req, res) => {
+  res.render('news')
+})
+
+app.get('/search', (req, res) => {
+  res.render('search')
+})
+
 app.listen(port, () => {
-  console.log(`[LINK] ------- http://localhost:${port}`)
+  console.log(`\n[LINK] ------- http://localhost:${port}\n`)
 })

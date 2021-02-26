@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon --inspect src/index.js",
+    "start": "nodemon src/index.js",
     "sass": "sass --watch src/views/scss:src/public/css"
   },
   "repository": {

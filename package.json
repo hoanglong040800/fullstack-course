@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon src/index.js",
     "sass": "sass --watch src/views/scss:src/public/css",
-    "format": "prettier --single-quote --trailing-comma all --write  *.{json,md}  src/*.js  src/*/*.{js,json,scss}"
+    "format": "prettier --single-quote --no-semi --arrow-parens avoid --write  *.{json,md}  src/*.js  src/*/*.{js,scss} src/*/*/*.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^5.2.1",
+    "mongoose": "^5.11.18",
     "node-sass": "^5.0.0"
   },
   "devDependencies": {

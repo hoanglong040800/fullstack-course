@@ -9,4 +9,5 @@ const Course = new Schema({
   updateAt: { type: Date, default: Date.now },
 })
 
+// Tên model trùng với tên docs trong MongoDB
 module.exports = mongoose.model('courses', Course)

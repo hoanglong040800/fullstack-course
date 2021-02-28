@@ -1,5 +1,9 @@
-@import "var";
+@import 'var';
 
-h3 {
-    color: $primary;
+footer {
+  color: $primary;
+}
+
+.navbar {
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
 }

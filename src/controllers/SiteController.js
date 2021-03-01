@@ -1,5 +1,5 @@
 const Course = require('../models/Course')
-const { multiMongooseToObject } = require('../utils/mongoose')
+const { multiMongooseToObject } = require('../utils/dbHelper')
 
 class SiteController {
   // [GET] /

@@ -1,0 +1,37 @@
+<div class="row justify-content-center my-5">
+  <div class="col-12 col-sm-6 col-lg-4">
+    <h3 class="mb-3">Tạo Khoá học</h3>
+    <form method="POST" action="/courses/store">
+      <div class="form-group">
+        {{! name }}
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          placeholder="Enter name"
+        />
+      </div>
+      {{! description }}
+      <div class="form-group">
+        <input
+          type="text"
+          name="description"
+          class="form-control"
+          placeholder="Enter description"
+        />
+      </div>
+      {{! thumnail }}
+      <div class="form-group">
+        <input
+          type="url"
+          name="thumnail"
+          class="form-control"
+          placeholder="Enter thumnail URL"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">
+        Add
+      </button>
+    </form>
+  </div>
+</div>

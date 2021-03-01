@@ -1,5 +1,5 @@
 const Course = require('../models/Course')
-const { mongooseToObject } = require('../utils/dbHelper')
+const { mongooseToObject, multiMongooseToObject } = require('../utils/dbHelper')
 
 class courseController {
   // [GET] /courses/create
@@ -25,9 +25,29 @@ class courseController {
       .catch(next)
   }
 
+  // [GET] /courses/:id/edit
+  edit(req, res, next) {
+    Course.findById(req.params.id)
+      .then(obj =>
+        res.render('courses/courseEdit', { course: mongooseToObject(obj) })
+      )
+      .catch(next)
+  }
+
+  // [PUT] /courses/:id
+  update(req, res, next) {
+    Course.findByIdAndUpdate(req.params.id, req.body)
+      .then(() => res.redirect('/me/stored/courses'))
+      .catch(next)
+  }
+
   // [GET] /courses
-  index(req, res) {
-    res.render('courses/courses')
+  index(req, res, next) {
+    Course.find()
+      .then(arr =>
+        res.render('courses/courses', { courses: multiMongooseToObject(arr) })
+      )
+      .catch(next)
   }
 }
 

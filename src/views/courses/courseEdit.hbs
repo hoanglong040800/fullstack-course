@@ -1,7 +1,9 @@
 <div class="d-flex justify-content-center my-5">
   <div class="col-12 col-sm-8 col-lg-4">
-    <h3 class="mb-3">Tạo Khoá học</h3>
-    <form method="POST" action="/courses/store">
+    <h3 class="mb-3">
+      Cập nhật Khoá học
+    </h3>
+    <form method="POST" action="/courses/{{course._id}}?_method=PUT">
       <div class="form-group">
         {{! name }}
         <input
@@ -9,17 +11,12 @@
           name="name"
           class="form-control"
           placeholder="Enter name"
+          value="{{course.name}}"
         />
       </div>
       {{! description }}
       <div class="form-group">
-      <div class="form-group">
-        <textarea
-          name="description"
-          class="form-control"
-          placeholder="Enter description"
-        ></textarea>
-      </div>
+        <textarea name="description" class="form-control" placeholder="Enter description">{{course.description}}</textarea>
       </div>
       {{! thumnail }}
       <div class="form-group">
@@ -28,10 +25,11 @@
           name="thumnail"
           class="form-control"
           placeholder="Enter thumnail URL"
+          value="{{course.thumnail}}"
         />
       </div>
       <button type="submit" class="btn btn-primary">
-        Add
+        Update
       </button>
     </form>
   </div>

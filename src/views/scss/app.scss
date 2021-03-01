@@ -1,9 +1,26 @@
 @import 'var';
 
-footer {
-  color: $primary;
-}
-
 .navbar {
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.fa-pen{
+  color: #2a86ff;
+}
+
+.fa-pen:hover {
+  color: #3779d0;
+}
+
+.fa-trash-alt{
+  color: rgba(255, 0, 0, 0.9);
+}
+
+.fa-trash-alt:hover{
+  color: rgb(218, 18, 18);
 }

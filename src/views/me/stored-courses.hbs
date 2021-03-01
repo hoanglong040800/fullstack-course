@@ -1,0 +1,61 @@
+<script
+  src="https://kit.fontawesome.com/9377e6dfb1.js"
+  crossorigin="anonymous"
+></script>
+<div class="my-5">
+  <h1>
+    My Courses
+  </h1>
+  <table class="table my-5">
+    {{! TITLE }}
+    <thead>
+      <tr>
+        <th scope="col">
+          #
+        </th>
+        <th scope="col">
+          Name
+        </th>
+        <th scope="col">
+          Description
+        </th>
+        <th scope="col">
+          Created At
+        </th>
+        <th scope="col">Updated At</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    {{! BODY }}
+    {{#each courses}}
+      <tbody>
+        <tr>
+          <th scope="row">
+            {{sum @index 1}}
+          </th>
+          <td>
+            {{this.name}}
+          </td>
+          <td>
+            {{this.description}}
+          </td>
+          <td>
+            {{this.createdAt}}
+          </td>
+          <td>
+            {{this.updatedAt}}
+          </td>
+          <td>
+            <a href="/courses/{{this._id}}/edit">
+              <i class="fas fa-pen icon"></i>
+            </a>
+            <a href="/courses/{{this._id}}/delete">
+              <i class="fas fa-trash-alt icon"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    {{/each}}
+    {{!  }}
+  </table>
+</div>

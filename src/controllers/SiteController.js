@@ -4,7 +4,7 @@ const { multiMongooseToObject } = require('../utils/dbHelper')
 class SiteController {
   // [GET] /
   home(req, res, next) {
-    Course.find({})
+    Course.find()
       .then(arr => res.render('home', { courses: multiMongooseToObject(arr) }))
       .catch(next)
   }

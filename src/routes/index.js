@@ -1,13 +1,15 @@
 const newsRouter = require('./news')
 const coursesRouter = require('./courses')
 const siteRouter = require('./site')
+const meRouter = require('./me')
 
-function route(app) {
+function index(app) {
   app.use('/news', newsRouter)
   app.use('/courses', coursesRouter)
+  app.use('/me', meRouter)
 
   // home, search
   app.use('/', siteRouter)
 }
 
-module.exports = route
+module.exports = index

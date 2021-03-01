@@ -3,8 +3,9 @@ const { urlencoded, json, static } = require('express')
 const morgan = require('morgan')
 const exphbs = require('express-handlebars')
 const path = require('path')
+const methodOverride = require('method-override')
 
-const route = require('./routes/route')
+const route = require('./routes')
 const db = require('./config/db')
 
 const port = 3000
@@ -12,6 +13,9 @@ const app = express()
 
 // Connect db
 db.connect()
+
+// Method Override
+app.use(methodOverride('_method'))
 
 // HTTP logger
 app.use(morgan('combined'))
@@ -26,10 +30,12 @@ app.engine(
   exphbs({
     defaultLayout: 'main',
     extname: '.hbs',
+    helpers: {
+      sum: (a, b) => a + b,
+    },
   })
 )
 app.set('view engine', 'hbs')
-console.log(__dirname)
 app.set('views', path.join(__dirname, 'views'))
 
 // Static

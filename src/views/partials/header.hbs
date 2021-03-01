@@ -1,6 +1,8 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<nav
+  class="navbar navbar-expand-sm navbar-dark bg-dark"
+>
   <a class="navbar-brand" href="/">
-    <img src="/img/logo.png" alt="" style="width: 120px" />
+    <img src="/img/logo.png" alt="" style="height: 20px" />
   </a>
   <button
     class="navbar-toggler"
@@ -13,6 +15,7 @@
   >
     <span class="navbar-toggler-icon"></span>
   </button>
+  {{!--  --}}
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
@@ -24,20 +27,42 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/courses">
-          Courses
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/courses/create">
-          Create
-        </a>
+        <a class="nav-link" href="/courses">Courses</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/news">
           News
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/search">Search</a>
+      </li>
+    </ul>
+    {{!--  --}}
+    <ul class="navbar-nav ml-auto mr-5">
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          My Account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/courses/create">
+            Create Course
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/me/stored/courses">
+            My Course
+          </a>
+        </div>
+      </li>
     </ul>
   </div>
+  {{!--  --}}
 </nav>

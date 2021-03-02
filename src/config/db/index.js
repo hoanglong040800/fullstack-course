@@ -5,10 +5,11 @@ async function connect() {
     await mongoose.connect('mongodb://localhost:27017/fullstack-course-dev', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useCreateIndex: true,
     })
-    console.log('Connect success')
+    console.log('\n---- Connect success ----\n')
   } catch (error) {
-    console.log('Connect fail\n')
+    console.log('\n---- Connect fail ----\n')
   }
 }
 

@@ -4,7 +4,7 @@
 ></script>
 <div class="my-5 px-3">
   <h1>
-    Your Deleted Courses
+    My Deleted Courses
   </h1>
   <table class="table table-hover my-5">
     <thead>
@@ -39,14 +39,14 @@
           <td>
             {{this.deletedAt}}
           </td>
-          <td>
+          <td class="d-flex flex-column">
             {{! RESTORE }}
             <i class="fas fa-undo btn-restore" data-id="{{this._id}}"></i>
             {{! PERMENTLY DELETE }}
             <a
               data-toggle="modal"
               data-target="#deleteCourseModal"
-              data-id={{this._id}}
+              data-id="{{this._id}}"
               data-name="{{this.name}}"
             >
               <i class="fas fa-trash-alt icon"></i>
@@ -63,7 +63,9 @@
     </tbody>
   </table>
 </div>
+{{!  }}
 {{! MODAL CONFIRM DELETE }}
+{{!  }}
 <div class="modal" tabindex="-1" role="dialog" id="deleteCourseModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -85,14 +87,16 @@
       {{!  }}
       <div class="modal-body">
         <p>
-          Do you want to permently delete course
+          This action can not be undo. Do you want to permently delete course
           <span class="font-weight-bold"></span>
           ?
         </p>
       </div>
       {{!  }}
       <div class="modal-footer">
-        <input type="submit" class="btn btn-danger" value="Delete" />
+        <button type="button" class="btn btn-danger btn-delete">
+          Force Delete
+        </button>
         {{!  }}
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Cancel
@@ -101,35 +105,46 @@
     </div>
   </div>
 </div>
+{{!  }}
 {{! FORM }}
+{{!  }}
 <div>
   <form method="POST" action="" id="form-restore"></form>
   <form method="POST" action="" id="form-delete"></form>
 </div>
+{{!  }}
+{{!  }}
 <script>
   document.addEventListener('DOMContentLoaded',function(){
-
-    var btnRestore=$('.btn-restore')
-    var formRestore=$('#form-restore')
+    var courseId
+    var btnRestore = $('.btn-restore')
+    var btnDelete = $('.btn-delete')
+    var formRestore = $('#form-restore')
+    var formDelete = $('#form-delete')
     
 
-    $('#deleteCourseModal').on('show.bs.modal', function(){
-        var button = $(this) 
-        var id = button.data('id')
+    $('#deleteCourseModal').on('show.bs.modal', function(e){
+        var button = $(e.relatedTarget) 
+        courseId = button.data('id')
         var name = button.data('name')
 
-        console.log(button.html())
         $('.modal-body p span').text(' '+name)
       })
 
 
+    btnDelete.click(function(e){
+
+      formDelete.attr('action','/courses/'+courseId+'/force?_method=DELETE')
+      formDelete.submit()
+    })
+
+
     btnRestore.click(function(e) {
       e.preventDefault()
-
       var id = $(this).data('id')
+
       formRestore.attr('action', '/courses/' + id + '/restore?_method=PATCH')
       formRestore.submit()
-    });
-    
+    })
   })
 </script>

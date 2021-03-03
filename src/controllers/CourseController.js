@@ -55,6 +55,13 @@ class courseController {
       .catch(next)
   }
 
+  // [DELETE] /courses/:id/force
+  forceDelete(req, res, next) {
+    Course.findByIdAndDelete(req.params.id)
+      .then(() => res.redirect('/me/deleted/courses'))
+      .catch(next)
+  }
+
   // [GET] /courses
   index(req, res, next) {
     Course.find()

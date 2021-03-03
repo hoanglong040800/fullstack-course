@@ -4,8 +4,9 @@
 ></script>
 <div class="my-5 px-3">
   <h1>
-    My Deleted Courses
+    My Deleted Courses ({{countDeleted}})
   </h1>
+  <a href="/me/stored/courses">My Courses ({{count}})</a>
   <table class="table table-hover my-5">
     <thead>
       <tr>
@@ -41,7 +42,7 @@
           </td>
           <td class="d-flex flex-column">
             {{! RESTORE }}
-            <i class="fas fa-undo btn-restore" data-id="{{this._id}}"></i>
+            <i class="fas fa-undo icon btn-restore" data-id="{{this._id}}"></i>
             {{! PERMENTLY DELETE }}
             <a
               data-toggle="modal"

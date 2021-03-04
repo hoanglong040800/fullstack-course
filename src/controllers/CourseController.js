@@ -7,6 +7,19 @@ class courseController {
     res.render('courses/courseCreate')
   }
 
+  // [POST] /courses/handle-form-actions
+  handleFormActions(req, res, next) {
+    switch (req.body.action) {
+      case 'delete':
+        Course.delete({ _id: { $in: req.body.courseIds } })
+          .then(res.redirect('/me/stored/courses'))
+          .catch()
+
+      default:
+        res.send('Action is invalid')
+    }
+  }
+
   // [POST] /courses/store
   store(req, res, next) {
     const course = new Course(req.body)

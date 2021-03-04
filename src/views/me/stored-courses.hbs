@@ -2,83 +2,126 @@
   src="https://kit.fontawesome.com/9377e6dfb1.js"
   crossorigin="anonymous"
 ></script>
+{{!--  --}}
+
+
 <div class="my-5 px-3">
-  <h1>
+  <div>
+    <h1>
     My Courses ({{count}})
-  </h1>
-  <a href="/me/deleted/courses">My Deleted Courses ({{countDeleted}})</a>
-  <table class="table table-hover my-5">
-    {{! TITLE }}
-    <thead>
-      <tr>
-        <th scope="col">
-          #
-        </th>
-        <th scope="col">
-          Name
-        </th>
-        <th scope="col">
-          Description
-        </th>
-        <th scope="col">
-          Created At
-        </th>
-        <th scope="col">
-          Updated At
-        </th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    {{! BODY }}
+    </h1>
 
-      <tbody>
-        {{#each courses}}
+    <a href="/me/deleted/courses">My Deleted Courses ({{countDeleted}})</a>
+  </div>
+
+<form method="POST" action="/courses/handle-form-actions" id="form-multi-action">
+  <div class="d-flex align-items-center m-5">
+    <div class="form-control-sm">
+      <input class="form-check-input" type="checkbox" id="checkbox-all">
+      <label class="my-0">Select All</label>
+    </div>
+
+    <select class="form-control-sm mx-3 select-action" name="action">
+      <option value="N/A">-- Select Action --</option>
+      <option value="delete">Delete</option>
+    </select>
+
+    <button
+      type="button"
+      data-toggle="modal"
+      data-target="#multiDeleteCourseModal" 
+      class="btn btn-primary btn-action" 
+      disabled="true"
+    >
+      Action
+    </button>
+  </div>
+
+  
+    <table class="table table-hover my-5">
+      {{! TITLE }}
+      <thead>
         <tr>
-          <th scope="row">
-            {{sum @index 1}}
+          <th scope="col">
           </th>
-          <td>
-            {{this.name}}
-          </td>
-          <td>
-            {{this.description}}
-          </td>
-          <td>
-            {{this.createdAt}}
-          </td>
-          <td>
-            {{this.updatedAt}}
-          </td>
-          <td>
-            {{! EDIT }}
-            <a href="/courses/{{this._id}}/edit">
-              <i class="fas fa-pen icon"></i>
-            </a>
-            {{! DELETE }}
-            <a
-              data-toggle="modal"
-              data-target="#deleteCourseModal"
-              data-id={{this._id}}
-              data-name="{{this.name}}"
-            >
-              <i class="fas fa-trash-alt icon"></i>
-            </a>
-          </td>
+          <th scope="col">
+            #
+          </th>
+          <th scope="col">
+            Name
+          </th>
+          <th scope="col">
+            Description
+          </th>
+          <th scope="col">
+            Created At
+          </th>
+          <th scope="col">
+            Updated At
+          </th>
+          <th scope="col"></th>
         </tr>
-        
-        {{else}}
-        <tr>
-          <td colspan='6' style="text-align: center;">
-            No course to show.
-            <a href="/courses/create"> Click me to create new course</a>
-            </td>
-        </tr>
+      </thead>
+      
+      {{! BODY }}
+        <tbody>
+          {{#each courses}}
+          <tr>
 
-        {{/each}}
-      </tbody>
-    {{!  }}
-  </table>
+            <td>
+              <div class="form-control-sm">
+                <input class="form-check-input checkbox-course" type="checkbox" name="courseIds[]" value="{{this._id}}">
+                {{!-- Add [] to make sure always return array --}}
+            </td>
+
+            <th scope="row">
+              {{sum @index 1}}
+            </th>
+            <td>
+              {{this.name}}
+            </td>
+            <td>
+              {{this.description}}
+            </td>
+            <td>
+              {{this.createdAt}}
+            </td>
+            <td>
+              {{this.updatedAt}}
+            </td>
+            <td>
+              {{! EDIT }}
+              <a href="/courses/{{this._id}}/edit">
+                <i class="fas fa-pen icon"></i>
+              </a>
+              {{! DELETE }}
+              <a
+                data-toggle="modal"
+                data-target="#deleteCourseModal"
+                data-id={{this._id}}
+                data-name="{{this.name}}"
+              >
+                <i class="fas fa-trash-alt icon"></i>
+              </a>
+            </td>
+          </tr>
+          
+          {{else}}
+          <tr>
+            <td colspan='6' style="text-align: center;">
+              No course to show.
+              <a href="/courses/create"> Click me to create new course</a>
+              </td>
+          </tr>
+
+          {{/each}}
+        </tbody>
+      {{!  }}
+    </table>
+    </form>
 </div>
+
+
 
 {{! MODAL CONFIRM DELETE }}
 <div class="modal" tabindex="-1" role="dialog" id="deleteCourseModal">
@@ -109,9 +152,9 @@
       </div>
       {{!  }}
       <div class="modal-footer">
-        <form method="POST" action="abc" id="deleteForm">
-          <input type="submit" class="btn btn-danger" value="Delete">
-          </input>
+          <button type="submit" class="btn btn-danger btn-delete">
+            Delete
+            </button>
         </form>
         {{!  }}
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -122,20 +165,119 @@
   </div>
 </div>
 
+{{! MODAL MULTI DELETE }}
+<div class="modal" tabindex="-1" role="dialog" id="multiDeleteCourseModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          WARNING MULTI DELETE
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">
+            ×
+          </span>
+        </button>
+      </div>
+      {{!  }}
+      <div class="modal-body">
+        <p>
+          Do you want to delete these course
+          <span class="font-weight-bold"></span>
+          ?
+        </p>
+      </div>
+      {{!  }}
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-multi-delete">
+            Delete
+            </button>
+        </form>
+        {{!  }}
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{{!--  --}}
+<form method="POST" action="" id="form-delete"></form>
+{{!--  --}}
+
 {{!  }}
 <script>
-  document.addEventListener('DOMContentLoaded',()=>{
+  document.addEventListener('DOMContentLoaded',function(){
+    var courseId
+    var btnDelete=$('.btn-delete')
+    var form = $('#form-delete')
     
-    $('#deleteCourseModal').on('show.bs.modal', event => {
-        var button = $(event.relatedTarget) 
-        var id = button.data('id')
-        var name = button.data('name')
-        var form=$('#deleteForm')
+    var checkboxAll = $('#checkbox-all')
+    var checkboxCourse = $('.checkbox-course')
+    
+    var btnAction = $('.btn-action')
+    var selectAction = $('.select-action')
+    var isCheckedToSubmit=false
+    var isSelectedToSubmit=false
 
-        form.attr('action',`/courses/${id}?_method=DELETE`)
+
+    $('#deleteCourseModal').on('show.bs.modal', event => {
+        var btn = $(event.relatedTarget) 
+        courseId = btn.data('id')
+        var name = btn.data('name')
+        
         $('.modal-body p span').text(' '+name)
+        
+        btnDelete.click(function(e){
+          form.attr('action',`/courses/${courseId}?_method=DELETE`)
+          form.submit()
+        })
       })
 
-    
+    // Checkbox All behavior
+    checkboxAll.change(function(){
+      var isChecked = $(this).prop('checked')
+
+      checkboxCourse.prop('checked',isChecked)
+      isCheckedToSubmit = isChecked
+      isSubmittable()
+    })
+
+    // Checkbox Course behavior    
+    checkboxCourse.change(function(){
+      var checkedCourses = $('.checkbox-course:checked')
+      var isCheckedAll = checkedCourses.length === checkboxCourse.length
+      
+      checkboxAll.prop('checked', isCheckedAll)
+
+      isCheckedToSubmit = checkedCourses.length > 0
+      isSubmittable()
+    })
+
+    // Select Action change
+    selectAction.change(function(){
+      isSelectedToSubmit = $(this).prop('value') == 'N/A' ? false : true
+      isSubmittable()
+    })
+
+    // Enable Submit button
+    function isSubmittable(){
+      isCheckedToSubmit && isSelectedToSubmit
+        ? btnAction.prop('disabled', false)
+        : btnAction.prop('disabled', true)
+    }
+
+    // Submit multi delete form
+      $('.btn-multi-delete').click(function(){
+        $('#form-multi-action').submit()
+      })
+
   })
 </script>

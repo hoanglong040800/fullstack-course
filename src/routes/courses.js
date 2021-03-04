@@ -5,6 +5,7 @@ const courseController = require('../controllers/CourseController')
 
 // OTHER
 router.post('/store', courseController.store)
+router.post('/handle-form-actions', courseController.handleFormActions)
 router.delete('/:id/force', courseController.forceDelete)
 router.patch('/:id/restore', courseController.restore)
 router.delete('/:id', courseController.delete)

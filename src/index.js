@@ -7,6 +7,7 @@ const methodOverride = require('method-override')
 
 const route = require('./routes')
 const db = require('./config/db')
+const SortMiddleware = require('./middlewares/SortMiddleware')
 
 const port = 3000
 const app = express()
@@ -24,6 +25,9 @@ app.use(morgan('combined'))
 app.use(urlencoded())
 app.use(json())
 
+// Custom Middleware
+app.use(SortMiddleware)
+
 // Template engine
 app.engine(
   'hbs',
@@ -32,6 +36,29 @@ app.engine(
     extname: '.hbs',
     helpers: {
       sum: (a, b) => a + b,
+      sortable: (column, sort) => {
+        const icons = {
+          default: 'oi oi-elevator',
+          asc: 'oi oi-arrow-bottom',
+          desc: 'oi oi-arrow-top',
+        }
+
+        const types = {
+          default: 'asc',
+          asc: 'desc',
+          desc: 'asc',
+        }
+
+        const sortType = column === sort.column ? sort.type : 'default'
+        const icon = icons[sortType]
+        const type = types[sortType]
+
+        return `
+        <a href="?_sort&column=${column}&type=${type}" class="link-th">
+          ${column}
+          <span class="${icon} icon-th"></span>
+        </a>`
+      },
     },
   })
 )

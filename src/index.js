@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const exphbs = require('express-handlebars')
 const path = require('path')
 const methodOverride = require('method-override')
+const _ = require('lodash')
 
 const route = require('./routes')
 const db = require('./config/db')
@@ -55,7 +56,7 @@ app.engine(
 
         return `
         <a href="?_sort&column=${column}&type=${type}" class="link-th">
-          ${column}
+          ${_.startCase(column)}
           <span class="${icon} icon-th"></span>
         </a>`
       },

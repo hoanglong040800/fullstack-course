@@ -16,10 +16,7 @@
 
 <form method="POST" action="/courses/handle-form-actions" id="form-multi-action">
   <div class="d-flex align-items-center m-5">
-    <div class="form-control-sm">
-      <input class="form-check-input" type="checkbox" id="checkbox-all">
-      <label class="my-0">Select All</label>
-    </div>
+
 
     <select class="form-control-sm mx-3 select-action" name="action">
       <option value="N/A">-- Select Action --</option>
@@ -43,6 +40,7 @@
       <thead>
         <tr>
           <th scope="col">
+              <input type="checkbox" id="checkbox-all">
           </th>
           <th scope="col">
             #
